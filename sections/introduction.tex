@@ -1,0 +1,60 @@
+\section{Introduction}
+The term IoT was coined by Kevin Ashton in 1999, since that time an entire 
+market as evolved around that concept, this types of devices are mostly known 
+thanks to platforms like HomeKit, Google Assistant and Alexa which democratized 
+the usage of this devices in the consumer market, this convenience brings two 
+things. Centralization which makes user dependent on this companies to make 
+their devices work and Standardization which enables developers transfer 
+knowledge from the implementation of one device into another. But there is a 
+flip side of this, we can achieve standardization without the centralization, 
+centralization is only achieve when we use proprietary protocols we can achieve 
+standardization using open protocols, this scenario is what the internet looked 
+like years ago and we ended using TCP/IP and HTTP as the standard for the web.
+
+Right now we still do not have a definitive answer on THE protocol for IoT but 
+there is a set of open standards that we can use, some of the are already being
+ used in "normal" computing like Bluetooth and HTTP and others are more 
+ specialized for IoT like CoAP, Zigbee, Z-Wave, MQTT, and some are currently 
+ being develop to tackle this fragmentation issue like Matter.
+
+Regardless of the communication protocol the architecture that is proposed in 
+this paper uses device as a gateway that standardize the behavior of the 
+devices, either sensors or actuators, and use a plugin architecture that enable 
+the providers, or third-party developers, to develop integration for different 
+devices, regardless of the protocol.
+
+The developers of this plugins focus mostly on how to talk to each particular 
+device and then this devices get standardized in  the platform, this enables 
+developers to think about the devices from a high level instead of worrying 
+about the implementation detail of each IoT device.
+
+The architecture uses a computer that lives in the same network that the IoT 
+devices and serve the purpose of an IoT Gateway, this computer also enables 
+user to communicate with the IoT devices without the need for an internet 
+connection. 
+
+The functionalities can be extended by adding a cloud integration, the IoT 
+Gateway connects to a remote cloud server via an interface which can be 
+implemented in any language, and sends information of the devices and also is 
+able to listen remote commands from the cloud, there isn't any requirement on 
+how this interface is implemented which gives developer flexibility to add 
+integration to another platform at this level.
+
+The architecture on the board focus mostly on data messaging and not data 
+processing or state management, it's main goal is to read states of the devices 
+and send command to them which makes it more effective to have a small machine 
+as an IoT Gateway and offset all the resource intensive task to the cloud, the 
+main goal of the board is to request the state of the devices and send command 
+to those devices.
+
+The cloud integration would be more suited for task like data-processing, 
+machine learning training, platform integration and automation and resource 
+management. In a cloud environment is more easy to add CPU, Memory or Storage 
+than the constraint environment like the board.
+
+The rest of the paper is organized as follows: Section 2 is going to review the 
+existing protocols that are used in the industry, Section 3 is going to 
+describe the architecture Section 4 is going to be a proposal of the resource 
+definition to standardize the IoT devices and Section 5 shows some use cases 
+for this architecture and Section 6 discuss some perspective on how this 
+architecture can be extended.
