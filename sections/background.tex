@@ -1,1 +1,116 @@
 \section{Background}
+{\it Introduction for the background}
+
+\subsection{Network Protocols}
+One of the goal of IoT is to have multiple of them to sense the world (sensors) 
+and change the state of the world as well (actuators) but this sensor are limit 
+to a single functionality so we need different devices that can act upon 
+different kind of inputs.
+
+The same way humans have different electrical terminals to sense the world, 
+temperature, touch, texture and have multiple ways to change the world upon 
+those inputs, breathing, muscle movement, temperature changes and the brain 
+is the organ responsible of this coordination, in IoT we need the same, we need 
+a network of different devices to sense the physical world and actuators to be 
+able change the state of that world. 
+
+The same way humans have different protocols to talk to the brain called 
+neurotransmitters, in IoT there is also a set of protocols that are used to 
+coordinate the communication from and to the IoT devices, the main advantage 
+that we have in IoT is that amount of protocols is not static as humans and 
+new protocols are being created to add more functionalities, like 
+Matter \cite{matter}. 
+
+\subsubsection{HTTP}
+HTTP is the protocol of the internet, this protocol power all the websites 
+that you see in your browser and also provide the entry point for API 
+integration that is offered by other companies. This protocol uses the 
+request-response paradigm, which a machine starts a request and a server 
+reply, this paradigm is easy to implement in IoT because of it's story and 
+support but it also has it's drawbacks, because this protocol is 
+half-duplex so the information can only flow one direction at a time and 
+every time a request is made it requires to perform a three-way handshake 
+which is bottleneck if we are sending a lot of information in a short 
+period of time like a real time system.
+
+This protocol is good enough if we are tracking sporadic events like an on-off 
+switch but it's a problem if we required to track real time information.
+
+\subsubsection{CoAP}
+CoAP is a web transfer protocol, specified in IETF RFC 7252, which was 
+designed for devices with limited computation and that also reside in a 
+network with limited bandwidth which is the most common scenario for 
+IoT Devices.
+
+This protocol is a lightweight version of the HTTP protocol specially 
+designed for IoT because it support multicast, it has a low overhead, 
+uses UDP instead of TCP and is simple because it uses the same REST 
+interaction model as HTTP.
+
+CoAP also requires DTLS for security, which is the TLS over the UDP protocol, 
+any other control access or security is performed at the application level with 
+provides developers the flexibility to tailor the security model to 
+their own needs.
+
+\subsubsection{MQTT}
+MQTT is another protocol that is perfectly suited for IoT Devices, it's 
+lightweight, it has lower power and bandwidth consumption and also has low 
+latency instead of focusing a request-response paradigm like HTTP or CoAP 
+is based in the publish-subscribe model.
+
+The benefit of said model is that is easy to scale because you don't need to 
+worry about what is the network topology, the publishers do not need to worry 
+about where the subscribers are located and the subscribers do not need to 
+worry about who the publisher is, the only thing that both requires is to 
+know where is the MQTT broker.
+
+With this kind of flexibility, simplicity, scalability, low overhead and low 
+bandwidth consumption this protocol would be the ideal protocol for IoT 
+devices that required to send data in real time.
+
+\subsubsection{Bluetooth}
+Bluetooth provides a short distance wireless communication with a lower power 
+consumption than protocols that uses WiFi, like HTTP, CoAP, MQTT, for IoT is 
+more common to use Bluetooth Low Energy (BLE) because it reduces more the 
+power consumption, the downside of this protocol is that the data transfer
+ are limited at 1 Mbps and the range is also smaller compared to WiFi 
+ protocols (100 meters).
+
+Because Bluetooth is a Personal Area Network technology (PAN) once the 
+communication is establish it provides a more reliable point-to-point 
+communication that the WiFi based protocols, because it doesn't depend on a 
+router for device discovery, since Bluetooth is more power efficient than 
+WiFi this protocol is suited for those devices that are mission critical that 
+do not required auto-discovery and that are required to run on battery for 
+long periods of time.
+
+\subsection{Frameworks}
+There are existing frameworks that have been develop to address the issue of 
+managing IoT devices from heterogenous vendors, some of them are all in one 
+solutions and other are an abstract implementation that provides a set of 
+principles on how the framework should be develop without imposing any 
+implementation detail.
+
+\subsubsection{OCF Framework}
+
+The OCF framework was created by the Open Connectivity Foundation, this 
+framework consists on three layers.
+
+\paragraph{Transports}
+Refers to the plugin interface that supports multiple number of transport 
+plugin modules which includes IPv4, IPv6, Ethernet, Wifi and Bluetooth LE but 
+the interface is transports agnostic.
+
+\paragraph{Core Framework}
+This is the centerpiece of the OCF architecture, it describes a resource 
+abstraction which is a set of tag-value pairs that describe the devices 
+using JSON, the reason for this is that all the aspects of the network 
+could be describe declaratively while supporting CRUDN semantics.
+
+\paragraph{Profiles}
+Profiles are libraries of resources that have a common functionality, which 
+are group according to target deployment, this kinds of profiles are 
+extensible, the data model of OCF supports resource introspection, which 
+enable the inspection of the device by a client.
+
+\subsubsection*{OneM2M}
